@@ -454,7 +454,7 @@ CCS811Core::status CCS811Core::beginCore(void)
 CCS811Core::status CCS811Core::readRegister(uint8_t offset, uint8_t * outputPointer)
 {
     // Return value
-    uint8_t result;
+    uint8_t result = '\0';
     uint8_t numBytes = 1;
 
     CCS811Core::status returnError = SENSOR_SUCCESS;
@@ -466,7 +466,7 @@ CCS811Core::status CCS811Core::readRegister(uint8_t offset, uint8_t * outputPoin
     }
 
     Wire.requestFrom(I2CAddress, numBytes);
-    while (Wire.available() ) // slave may send less than requested
+    while (Wire.available()) // slave may send less than requested
     {
         result = Wire.read(); // receive a byte as a proper uint8_t
     }
