@@ -126,7 +126,8 @@ boolean Plugin_153(byte function, struct EventStruct *event, String& string)
         optionValues[1] = 1;
         options[2] = F("Manual");
         optionValues[2] = 2;
-        addFormSelector(string, F("Mode"), F("plugin_153_mode"), 3, options, optionValues, choice_mode);
+        //addFormSelector(string, F("Mode"), F("plugin_153_mode"), 3, options, optionValues, choice_mode);
+		addFormSelector(F("Mode"), F("plugin_153_mode"), 3, options, optionValues, choice_mode);
         if( choice_mode != 0)
         {
           //########################
@@ -135,7 +136,8 @@ boolean Plugin_153(byte function, struct EventStruct *event, String& string)
           optionValues[0] = 0;
           options[1] = F("Divided 1/8");
           optionValues[1] = 1;
-          addFormSelector(string, F("Current Division Ratio"), F("plugin_153_divide"), 2, options, optionValues, choice_division);
+          //addFormSelector(string, F("Current Division Ratio"), F("plugin_153_divide"), 2, options, optionValues, choice_division);
+		  addFormSelector(F("Current Division Ratio"), F("plugin_153_divide"), 2, options, optionValues, choice_division);
           //########################
           byte choice_time = Settings.TaskDevicePluginConfig[event->TaskIndex][2];
           float integration_time = 800;
@@ -146,7 +148,8 @@ boolean Plugin_153(byte function, struct EventStruct *event, String& string)
             optionValues[i] = i;
             integration_time = integration_time/2.0;
           }
-          addFormSelector(string, F("Integration Time"), F("plugin_153_time"), 8, options, optionValues, choice_time);
+          //addFormSelector(string, F("Integration Time"), F("plugin_153_time"), 8, options, optionValues, choice_time);
+		  addFormSelector(F("Integration Time"), F("plugin_153_time"), 8, options, optionValues, choice_time);
         }
         success = true;
         break;
