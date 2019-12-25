@@ -1008,5 +1008,6 @@ String CCS811::getSensorError()
             return "MsgInvalid";
         }
     }
+	return "Unknown";
 }
 #endif
