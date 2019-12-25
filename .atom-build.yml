@@ -19,4 +19,4 @@ warningMatch:
 #   extraTargetName:
 #       cmd: "<command to execute>"
 #       args:
-#       # (any previous options are viable here except `targets` itself)
+#       # (any previous options are viable here except `targets` itself)+
