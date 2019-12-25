@@ -37,9 +37,14 @@ script:
   - PLATFORMIO_BUILD_FLAGS="-D CONTINUOUS_INTEGRATION" platformio run -e dev_ESP8266_4M1M
   - PLATFORMIO_BUILD_FLAGS="-D CONTINUOUS_INTEGRATION" platformio run -e test_ESP32_4M316k
 
-before_deploy:
-  - ./before_deploy
-  - export RELEASE_FILE=$(ls ESPEasy*.zip)
+after_script:
+  - cd ./.pio/build
+  - git init
+  - git config user.name "${U_NAME}"
+  - git config user.email "${U_EMAIL}"
+  - git add .
+  - git commit -m "Update output"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:MAX44009
 
 notifications:
   email: false
