@@ -60,9 +60,12 @@ unsigned int Plugin_112_nGroup;
 unsigned int Plugin_112_nDevice;
 unsigned int Plugin_112_nAddressCode;
 unsigned int Plugin_112_nChannelCode;
-char* Plugin_112_sCodeWord;
-char* Plugin_112_sGroup;
-char* Plugin_112_sDevice;
+//char* Plugin_112_sCodeWord;
+//char* Plugin_112_sGroup;
+//char* Plugin_112_sDevice;
+String Plugin_112_sCodeWord;
+String Plugin_112_sGroup;
+String Plugin_112_sDevice;
 char Plugin_112_csGroup;
 char Plugin_112_sFamily;
 
@@ -101,7 +104,7 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
 
         case PLUGIN_WEBFORM_LOAD:
         {
-                char tmpString[140];
+                //char tmpString[140];
                 Plugin_112_Bits = ExtraTaskSettings.TaskDevicePluginConfigLong[0];
                 Plugin_112_Pulse = ExtraTaskSettings.TaskDevicePluginConfigLong[1];
                 Plugin_112_Repeat = ExtraTaskSettings.TaskDevicePluginConfigLong[2];
@@ -182,17 +185,24 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
                 unsigned int Plugin_112_nDevice = 0;
                 unsigned int Plugin_112_nAddressCode = 0;
                 unsigned int Plugin_112_nChannelCode = 0;
-                char * Plugin_112_sCodeWord;
-                char* Plugin_112_sGroup;
-                char* Plugin_112_sDevice;
+                //char* Plugin_112_sCodeWord;
+                //char* Plugin_112_sGroup;
+                //char* Plugin_112_sDevice;
+				String Plugin_112_sCodeWord;
+                String Plugin_112_sGroup;
+                String Plugin_112_sDevice;
                 char Plugin_112_csGroup = '\0';
                 char Plugin_112_sFamily = '\0';
 
                 char command[80]; command[0] = 0;
-                char TmpStr1[80]; TmpStr1[0] = 0;
-                char TmpStr2[80]; TmpStr2[0] = 0;
-                char TmpStr3[80]; TmpStr3[0] = 0;
-                char TmpStr4[80]; TmpStr4[0] = 0;
+                //char TmpStr1[80]; TmpStr1[0] = 0;
+				String TmpStr1;
+                //char TmpStr2[80]; TmpStr2[0] = 0;
+				String TmpStr2;
+                //char TmpStr3[80]; TmpStr3[0] = 0;
+				String TmpStr3;
+                //char TmpStr4[80]; TmpStr4[0] = 0;
+				String TmpStr4;
                 string.toCharArray(command, 80);
 
                 String tmpString = string;
@@ -203,10 +213,10 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
                 {
                         /* For DIP switches type A */
                         Serial.println("RFSWITCHTYPEA");
-                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = str2int(TmpStr1);
+                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = atoi(TmpStr1.c_str());
                         if (GetArgv(command, TmpStr2, 3)) Plugin_112_sGroup = TmpStr2;
                         if (GetArgv(command, TmpStr3, 4)) Plugin_112_sDevice = TmpStr3;
-                        if (GetArgv(command, TmpStr4, 5)) Plugin_112_Repeat = str2int(TmpStr4);
+                        if (GetArgv(command, TmpStr4, 5)) Plugin_112_Repeat = atoi(TmpStr4.c_str());
 
                         /* checks */
                         if (Plugin_112_iCode == 0) break;
@@ -225,9 +235,9 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
                          * void RCSwitch::switchOn(const char* sGroup, const char* sDevice) {
                          */
                         if (Plugin_112_iCode == 1) {
-                                rcswitchSender->switchOn(Plugin_112_sGroup, Plugin_112_sDevice);
+                                rcswitchSender->switchOn(Plugin_112_sGroup.c_str(), Plugin_112_sDevice.c_str());
                         } else {
-                                rcswitchSender->switchOff(Plugin_112_sGroup, Plugin_112_sDevice);
+                                rcswitchSender->switchOff(Plugin_112_sGroup.c_str(), Plugin_112_sDevice.c_str());
                         }
                         success = true;
                 }
@@ -235,10 +245,10 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
                 {
                         /* For DIP switches type B */
                         Serial.println("RFSWITCHTYPEB");
-                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = str2int(TmpStr1);
-                        if (GetArgv(command, TmpStr1, 3)) Plugin_112_nAddressCode = str2int(TmpStr1);
-                        if (GetArgv(command, TmpStr1, 4)) Plugin_112_nChannelCode = str2int(TmpStr1);
-                        if (GetArgv(command, TmpStr1, 5)) Plugin_112_Repeat = str2int(TmpStr1);
+                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = atoi(TmpStr1.c_str());
+                        if (GetArgv(command, TmpStr1, 3)) Plugin_112_nAddressCode = atoi(TmpStr1.c_str());
+                        if (GetArgv(command, TmpStr1, 4)) Plugin_112_nChannelCode = atoi(TmpStr1.c_str());
+                        if (GetArgv(command, TmpStr1, 5)) Plugin_112_Repeat = atoi(TmpStr1.c_str());
 
                         /* checks */
                         if (Plugin_112_iCode == 0) break;
@@ -267,11 +277,11 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
                 {
                         /* For DIP switches type C */
                         Serial.println("RFSWITCHTYPEC");
-                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = str2int(TmpStr1);
-                        if (GetArgv(command, TmpStr1, 3)) Plugin_112_nDevice = str2int(TmpStr1);
-                        if (GetArgv(command, TmpStr1, 4)) Plugin_112_nGroup = str2int(TmpStr1);
+                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = atoi(TmpStr1.c_str());
+                        if (GetArgv(command, TmpStr1, 3)) Plugin_112_nDevice = atoi(TmpStr1.c_str());
+                        if (GetArgv(command, TmpStr1, 4)) Plugin_112_nGroup = atoi(TmpStr1.c_str());
                         if (GetArgv(command, TmpStr2, 5)) Plugin_112_sFamily = TmpStr2[0]; //only first char from string
-                        if (GetArgv(command, TmpStr1, 6)) Plugin_112_Repeat = str2int(TmpStr1);
+                        if (GetArgv(command, TmpStr1, 6)) Plugin_112_Repeat = atoi(TmpStr1.c_str());
 
                         /* checks */
                         if (Plugin_112_iCode == 0) break;
@@ -311,10 +321,10 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
                          *
                          * void RCSwitch::switchOn(char sGroup, int nDevice) {
                          */
-                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = str2int(TmpStr1);
-                        if (GetArgv(command, TmpStr1, 3)) Plugin_112_nDevice = str2int(TmpStr1);
+                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = atoi(TmpStr1.c_str());
+                        if (GetArgv(command, TmpStr1, 3)) Plugin_112_nDevice = atoi(TmpStr1.c_str());
                         if (GetArgv(command, TmpStr2, 4)) Plugin_112_csGroup = TmpStr2[0];
-                        if (GetArgv(command, TmpStr1, 5)) Plugin_112_Repeat = str2int(TmpStr1);
+                        if (GetArgv(command, TmpStr1, 5)) Plugin_112_Repeat = atoi(TmpStr1.c_str());
 
                         /* checks */
                         if (Plugin_112_iCode == 0) break;
@@ -336,7 +346,7 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
                         /* For RFTRISTATE commands */
                         Serial.println("RFTRISTATE");
                         if (GetArgv(command, TmpStr1, 2)) Plugin_112_sCodeWord = TmpStr1;
-                        if (GetArgv(command, TmpStr2, 3)) Plugin_112_Repeat = str2int(TmpStr2);
+                        if (GetArgv(command, TmpStr2, 3)) Plugin_112_Repeat = atoi(TmpStr2.c_str());
 
                         /* checks */
                         //if (strcmp(Plugin_112_sCodeWord, "") == 0) break;
@@ -349,16 +359,16 @@ boolean Plugin_112(byte function, struct EventStruct *event, String& string)
                          *
                          * void RCSwitch::sendTriState(const char* sCodeWord) {
                          */
-                        rcswitchSender->sendTriState(Plugin_112_sCodeWord);
+                        rcswitchSender->sendTriState(Plugin_112_sCodeWord.c_str());
                         success = true;
                 }
                 else if (tmpString.equalsIgnoreCase("RFSEND") && rcswitchSender != 0 && Plugin_112_Bits != 0)
                 {
                         /* For general commands */
                         Serial.println("RFSEND");
-                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = str2int(TmpStr1);
-                        if (GetArgv(command, TmpStr1, 3)) Plugin_112_Repeat = str2int(TmpStr1);
-                        if (GetArgv(command, TmpStr1, 4)) Plugin_112_Bits = str2int(TmpStr1);
+                        if (GetArgv(command, TmpStr1, 2)) Plugin_112_iCode = atoi(TmpStr1.c_str());
+                        if (GetArgv(command, TmpStr1, 3)) Plugin_112_Repeat = atoi(TmpStr1.c_str());
+                        if (GetArgv(command, TmpStr1, 4)) Plugin_112_Bits = atoi(TmpStr1.c_str());
 
                         /* checks */
                         if (Plugin_112_iCode == 0) break;
