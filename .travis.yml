@@ -36,6 +36,7 @@ script:
   # Same list as in tools/build_ESPeasy.sh  and before_deploy
   - PLATFORMIO_BUILD_FLAGS="-D CONTINUOUS_INTEGRATION" platformio run -e dev_ESP8266_4M1M
   - PLATFORMIO_BUILD_FLAGS="-D CONTINUOUS_INTEGRATION" platformio run -e test_ESP32_4M316k
+  - PLATFORMIO_BUILD_FLAGS="-D CONTINUOUS_INTEGRATION" platformio run -e custom_dev_ESP8266_4M1M
 
 after_script:
   - cd ./.pio/build
